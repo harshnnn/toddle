@@ -1,5 +1,5 @@
 import './App.css';
-import { IoAddOutline } from "react-icons/io5";
+import { IoMdAdd } from "react-icons/io";
 import { IoMdArrowDropup, IoMdArrowDropdown, IoIosLink } from "react-icons/io";
 import { LiaDatabaseSolid } from "react-icons/lia";
 import { TfiUpload } from "react-icons/tfi";
@@ -94,7 +94,7 @@ function App() {
                     className="flex items-center gap-1 bg-custom-red hover:bg-custom-red-hover text-white font-bold py-2 px-4 rounded"
                     onClick={() => setAddBtnActive(!addBtnActive)}
                 >
-                    <IoAddOutline />
+                    <IoMdAdd />
                     Add
                     {addBtnActive ? <IoMdArrowDropup /> : <IoMdArrowDropdown />}
                 </button>
