@@ -5,7 +5,7 @@ import { LiaDatabaseSolid } from "react-icons/lia";
 import { TfiUpload } from "react-icons/tfi";
 import { ReactComponent as NothingAdded } from './resources/Group 4606.svg';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import AddModule from './components/AddModule';
 import AddLink from './components/AddLink';
 import Upload from './components/Upload';
@@ -25,6 +25,21 @@ function App() {
     const [editModule, setEditModule] = useState(null);
     const [editLink, setEditLink] = useState(null);
     const [editUpload, setEditUpload] = useState(null);
+
+    const dropdownRef = useRef(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setAddBtnActive(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
 
     const addModule = (module) => {
         setModules([...modules, module]);
@@ -85,9 +100,9 @@ function App() {
                 </button>
             </nav>
            
-            <div className='w-3/4'>
+            <div className='w-3/4' ref={dropdownRef}>
                 {addBtnActive && (
-                    <div className="mt-4 ml-auto mr-4 p-4 bg-gray-100 rounded-md shadow-lg w-1/4 flex flex-col">
+                    <div className="absolute z-10 right-48 mt-4 ml-auto mr-4 p-4 bg-gray-100 rounded-md shadow-lg w-1/4 flex flex-col">
                         <button className="flex items-center space-x-2 p-2 hover:bg-gray-200 rounded transition duration-200" onClick={() => setShowAddModule(true)}>
                             <LiaDatabaseSolid /> <span>Create Module</span>
                         </button>
